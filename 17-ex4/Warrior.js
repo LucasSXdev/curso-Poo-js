@@ -1,20 +1,27 @@
+const Character = require("./Character");
+
 class Warrior extends Character {
-  constructor(name, life, power, def, shield, position) {
+  constructor(name, life, power, def, shield) {
     super(name, life, power, def);
     this.shield = shield;
-    this.position = position;
+    this.position = "Attack";
   }
 
   attack(target) {
-    if (this.position === "Ataque") {
+    if (this.position === "Attack") {
       super.attack(target);
-    } else {
-      this.def += this.shield;
     }
   }
 
-  getPosition(position) {
-    this.position = position;
-    this.attack();
+  switchPosition() {
+    if (this.position === "Attack") {
+      this.position = "Defense";
+      this.def += this.shield;
+    } else {
+      this.position = "Attack";
+      this.def -= this.shield;
+    }
   }
 }
+
+module.exports = Warrior;
